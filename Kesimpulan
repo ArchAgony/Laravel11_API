@@ -72,3 +72,24 @@ TIMESTAMP:
 
    Di kasus ini, saya ingin menampilkan halaman yang bernama register.blade.php. Jadi, sebelum menulis ini, lebih baik membuat file bernama seperti itu tadi.
    Setelah itu, saya membuat desain halaman register. Hasilnya dapat di cek di view project ini.
+
+   == di bagian input nya, jangan lupa diberi name seperti model. Karena berkaitan dengan penjelasan berikutnya ==
+
+   4.a Setelah ini, saya membuat routing dengan method Post untuk menampung hasil dari halaman register. Alasannya adalah, halaman register itu berupa form.
+   Metode yang digunakan kurang lebih sama. Yang membedakan hanya method dan function nya.
+
+   5.a Setelah itu, saya membuat function di controller dengan nama simpanuser. Bedanya, di function ini akan digunakan untuk menampung hasil input. Seperti ini:
+
+    --$user = User::Create([
+            'name'  => $request->nama,
+            'email' => $request->email,
+            'password' => $request->password
+        ]);--
+    --return redirect ('/register');-- untuk kembali ke halaman redirect
+
+    == Jangan lupa untuk menambah use App\Models\User; untuk menghubungkan controller dengan model ==
+
+    Jadi, saya akan mengambil tabel dari model. Model tersebut akan digunakan untuk menambah/membuat data berdasarkan hasil input diatas.
+
+    'name' mengacu pada isi dari model, $request mengacu pada function [di function akan ditambah (request $request) dan dipastikan sudah ada use Illuminate\Http\Request;
+    untuk bisa menggunakan fungsi request], dan ->nama mengacu pada name di bagian input, seperti yang sudah dijelaskan di 3.a.
