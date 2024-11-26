@@ -1,0 +1,74 @@
+Pembelajaran ini saya dapat dari channel YouTube Kampus IT yang bertajuk User Auth, CRUD dan RESTful API (Backend) Laravel.
+Meskipun tutorial yang diberikan menggunakan Laravel Versi 7, namun pembelajaran ini masih bisa saya ikuti dengan mengecek dokumentasi Laravel versi 11.
+
+TIMESTAMP:
+1. Pada Video pertama, saya diberikan kata pembuka, seperti aplikasi yang perlu diinstall, dll.
+=======================================================================================================================================================================
+2. Pada Video kedua, saya disuruh untuk membuat projek baru menggunakan perintah:
+
+    --composer create-project laravel/laravel:^11.0 Belajar-api--
+
+   Setelah itu, diberikan pengenalan folder dan direktori yang akan digunakan, seperti direktori route, resource/views, database, app/http, dan .env
+=======================================================================================================================================================================
+3. Pada Video ketiga, saya disuruh mengonfigurasi koneksi dan user migrations. 
+   1.a Disini, saya akan mengubah database di .env menjadi seperti ini:
+    
+      --DB_CONNECTION=mysql
+        DB_HOST=127.0.0.1
+        DB_PORT=3306
+        DB_DATABASE=webbackend
+        DB_USERNAME=root
+        DB_PASSWORD=--
+  
+   2.a Tabel database yang akan digunakan berasal dari bawaannya, yaitu 0001_01_01_000000_create_users_table.php. 
+     Di dalam tabel database, saya melakukan sedikit perubahan, letaknya di dalam function Schema::create. Yang diubah adalah:
+  
+      --$table->id();
+        $table->string('name');
+        $table->string('email')->unique();
+        $table->string('password');
+        $table->timestamps();--
+  
+     Tujuannya adalah untuk memberikan isi tabel yang akan di migrasi. Bagian yang memiliki petik, contohnya string('password');, berfungsi untuk mengatur 
+     bagian yang akan ditampilkan. Bagian tersebut juga akan digunakan untuk model. 
+  
+   3.a Saya menggunakan model yang sudah disediakan, yaitu User.php. Di dalam model tersebut, saya membuat perintah seperti ini:
+  
+      --protected $fillable = [
+            'name',
+            'email',
+            'password',
+        ];--
+  
+     Tujuannya adalah untuk membuat bagian yang dapat diisi. Nah, bagian yang dapat diisi ini berasal dari tabel yang sudah dijelaskan diatas.
+  
+   4.a Setelah itu, tabel nya tinggal di migrasi dengan perintah ini:
+  
+      --php artisan migrate --path=/database/migrations/0001_01_01_000000_create_users_table.php--
+  
+     Tujuannya adalah agar tabel yang ditentukan akan di migrasi dan membuat tabel users sesuai dengan perubahan yang telah dilakukan.
+=======================================================================================================================================================================
+4. Pada Video keempat, saya disuruh untuk membuat fitur register
+   1.a Di bagian ini, saya akan membuat controller dengan nama AuthController. Caranya adalah seperti ini:
+
+    --php artisan make:controller AuthController--
+
+   2.a Setelah itu, saya membuat routing dengan method Get untuk menampilkan halaman. Contohnya seperti ini:
+
+    --Route::get('/register', [AuthController::class, 'register']);--
+
+   Jangan lupa untuk menyambungkan route ke controller, seperti ini:
+    --use App\Http\Controllers\AuthController;--
+
+   Seperti yang sudah dicontohkan, saya akan mengarahkan ke routing /register, yang lokasinya ada di AuthController, dan di function bernama register.
+
+   3.a Di dalam controller, saya akan membuat function bernama register, seperti yang diatas tadi. Isinya adalah untuk menampilkan halaman yang ingin dituju
+
+    --public function register()
+    {
+        //
+        return view('register');
+    }--
+
+   Di kasus ini, saya ingin menampilkan halaman yang bernama register.blade.php. Jadi, sebelum menulis ini, lebih baik membuat file bernama seperti itu tadi.
+   Setelah itu, saya membuat desain halaman register. Hasilnya dapat di cek di view project ini.
