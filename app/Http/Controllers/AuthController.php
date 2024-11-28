@@ -35,7 +35,6 @@ class AuthController extends Controller
         return redirect('/register');
     }
 
-
     public function login()
     {
         //

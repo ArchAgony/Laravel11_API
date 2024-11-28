@@ -11,8 +11,8 @@ class NavController extends Controller
     }
 
     public function user(){
-        $user = User::all();
-        return view('user', ['key' => 'user', 'user' => $user]);
+        $user = User::paginate(2);
+        return view('user', ['key' => 'user', 'user' => $user]); // navigasi, menampung
     }
 
 

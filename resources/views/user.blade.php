@@ -6,18 +6,21 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Nama User</th>
+                <th scope="col">Email User</th>
             </tr>
         </thead>
         <tbody>
+            @foreach ($user as $no => $u)
+            {{-- $key (dari controller) as $alias --}}
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <th scope="row">{{$user->firstItem() + $no}}</th>
+                <td>{{ $u->name }}</td>
+                {{-- // alias->nama_tabel --}}
+                <td>{{ $u->email }}</td>
             </tr>
+            @endforeach
         </tbody>
     </table>
+    <span class="float-right">{{ $user->links() }}</span>
 @endsection
