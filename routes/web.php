@@ -19,5 +19,6 @@ Route::post('/cekLogin', [AuthController::class, 'cekLogin']);
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/home', [NavController::class, 'home']);
     Route::get('/user', [NavController::class, 'user']);
+    Route::get('/student', [NavController::class, 'student']);
     Route::get('/logout', [AuthController::class, 'logout']);
 });

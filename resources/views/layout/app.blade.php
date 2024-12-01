@@ -13,7 +13,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12 py-2 bg-primary">
+            <div class="py-2 col-lg-12 bg-primary">
                 <div class="dropdown float-end">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -39,15 +39,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-2 pt-4 border">
+            <div class="pt-4 border col-lg-2">
                 <nav class="nav flex-column">
-                    <a class="nav-link {{ ($key == 'home') ? 'bg-primary border rounded-pill text-light' : '' }}" href="/home" role="tab">Home</a>
-                    <a class="nav-link {{ ($key == 'user') ? 'bg-primary border rounded-pill text-light' : '' }}" href="/user" role="tab">Users</a>
-                    <a class="nav-link" href="#" role="tab">To do list</a>
+                    <a class="nav-link {{ $key == 'home' ? 'bg-primary border rounded-pill text-light' : '' }}"
+                        href="/home" role="tab">Home</a>
+                    <a class="nav-link {{ $key == 'user' ? 'bg-primary border rounded-pill text-light' : '' }}"
+                        href="/user" role="tab">Users</a>
+                    <a class="nav-link {{ $key == 'student' ? 'bg-primary border rounded-pill text-light' : '' }}" href="/student" role="tab">Student</a>
                     <a class="nav-link" href="#" role="tab">Report</a>
                 </nav>
             </div>
-            <div class="col-lg-10 mt-4 vh-100">
+            <div class="mt-4 col-lg-10 vh-100">
                 <div class="card">
                     <div class="card-body">
                         {{-- Content Article --}}
