@@ -9,5 +9,11 @@ class Student extends Model
     //
     protected $table = 'student';
 
-    
+    protected $fillable = [
+        'nim',
+        'nama',
+        'gender',
+        'jurusan',
+        'keahlian'
+    ];
 }
