@@ -73,8 +73,19 @@ implements HasMiddleware
 
     public function update(Request $request, Post $post)
     {
-        //
-        Gate::authorize('modify', $post);
+        // mengatur izin (authorization).
+
+        // memverifikasi apakah pengguna yang sedang login memiliki izin untuk melakukan suatu tindakan
+        // izinnya berasal dari policy
+        Gate::authorize
+
+        // nama function yang ada di postPolicy
+        // memeriksa apakah pengguna yang sedang login adalah pemilik post.
+        ('modify',
+
+        // argument yang diperlukan dari policy diatas (di dalam parameter function modify)
+        // jangan lupa menambah argumen yang sama di parameter function ini
+        $post);
 
         // menyimpan method post di dalam database
         $fields = $request->validate([
@@ -95,6 +106,20 @@ implements HasMiddleware
 
     public function destroy(Post $post)
     {
+        // mengatur izin (authorization).
+
+        // memverifikasi apakah pengguna yang sedang login memiliki izin untuk melakukan suatu tindakan
+        // izinnya berasal dari policy
+        Gate::authorize
+
+        // nama function yang ada di postPolicy
+        // memeriksa apakah pengguna yang sedang login adalah pemilik post.
+        ('modify',
+
+        // argument yang diperlukan dari policy diatas (di dalam parameter function modify)
+        // jangan lupa menambah argumen yang sama di parameter function ini
+        $post);
+
         // menghapus data berdasarkan id yang dipilih
         $post->delete();
 

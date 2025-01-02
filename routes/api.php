@@ -5,9 +5,6 @@ use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:sanctum');
 
 // mengembalikan pesan 'api'
 Route::get('/', function (){
@@ -36,3 +33,11 @@ Route::post('/login', [AuthController::class, 'login']);
 // menambahkan middleware yang tujuannya untuk mengecek dan mengauthentikasi
 // jika user belum pernah login, maka user tidak bisa logout. nanti pesannya menjadi "unauthenticated"
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
+// menampilkan data user
+Route::get('/user', function (Request $request) {
+    // memeriksa pengguna berdasarkan token yang valid, lalu mengembalikan data pengguna tersebut dalam format JSON
+
+    // jadi, nanti bakal nampilne data user berdasarkan tokennya
+    return $request->user();
+})->middleware('auth:sanctum');
