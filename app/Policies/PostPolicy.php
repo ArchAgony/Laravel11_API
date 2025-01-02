@@ -8,59 +8,21 @@ use Illuminate\Auth\Access\Response;
 
 class PostPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
+    // menentukan apakah pengguna tertentu ($user) memiliki izin untuk memodifikasi sebuah post ($post)
+    public function modify(
+        // pengguna yang sedang mencoba melakukan aksi.
+        User $user,
+        // model Post yang akan dimodifikasi.
+        Post $post): Response
     {
-        return false;
-    }
+        // Mengecek apakah ID pengguna yang sedang login ($user->id) sama dengan ID pengguna yang memiliki post tersebut ($post->user_id).
+        // Jika cocok, berarti pengguna memiliki izin untuk memodifikasi post tersebut.
+        return $user->id === $post->user_id
 
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Post $post): bool
-    {
-        return false;
-    }
+            // jika benar, maka aksi boleh dilakukan
+            ? Response::allow()
 
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, Post $post): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, Post $post): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Post $post): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Post $post): bool
-    {
-        return false;
+            // jika salah, maka aksi akan ditolak dan menampilkan pesan
+            : Response::deny('you do not own this post');
     }
 }

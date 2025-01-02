@@ -14,32 +14,29 @@ class User extends Authenticatable
     // memuat fitur bawaan sanctum untuk membuat token
     use HasApiTokens;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
+    // ngehubungin model Post ke User
+    // nama function ini akan dipakai saat menambah data (cek ke postController)
+    public function posts(){
+        // hasMany buat ngasih foreign key ke model yang dituju
+
+        // maksud e gini, di model post itu punya yang namanya foreign key
+        // nah, foreign key ini yang bakal kita pake.
+        // klo dilihat di struktur tabel post, nanti ada kolom user_id.
+        // user id itulah foreign keynya. dan user_id itu ambilya kan otomatis harus di model user
+        return $this->hasMany(Post::class);
+    }
+
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [

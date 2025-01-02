@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+
+            // Membuat kolom foreign key bernama user_id untuk menghubungkan tabel ini ke tabel users
+            $table->foreignId('user_id')
+
+            // menjelaskan bahwa user_id itu foreign id nyambung ke tabel lain
+            ->constrained()
+
+            // membuat aturan, jika di tabel induk (users) dihapus, maka di tabel ini dihapus
+            // misal klo mau delete user, nanti id yang asal e dari sana ikut dihapus
+            ->cascadeOnDelete();
+            
             // isi dari tabel post database
             $table->string('title');
             $table->text('body');

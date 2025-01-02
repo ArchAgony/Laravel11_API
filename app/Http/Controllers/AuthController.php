@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    //
+    // kita menggunakan Request $request yang fungsinya untuk menangani data yang diterima dari permintaan
+    // termasuk informasi pengguna
     public function register(Request $request){
         // membuat validasi (ketentuan mengisi formnya, seperti kata maks, bagian yang harus diisi, dll)
         $fields = $request->validate([
@@ -83,7 +84,27 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request){
-        $request->user()->tokens()->delete();
+        // untuk logoutnya lumayan rumit, kyk gini penjelasannya
+
+        
+        // pertama, kita mengambil informasi pengguna yang lagi login
+
+        // informasi ne dapet dari middleware authentikasi
+        // yang ini ->middleware('auth:sanctum'), letak e di route.
+
+        // authentikasi ini fungsine ngecek, apakah user sudah login
+        // kalo belum, ntar ada error bawaannya sendiri ('message' => 'unauthenticated')
+        $request->user()
+
+        // kedua, sehabis mengambil informasi, kita mengarahkan ke tokens() yang nyambung ke user() dengan token authentikasi
+        // karena kita pake e sanctum, model user itu kehubung ke model personal_access_token
+        // nah, personal_access_tokens itulah tempat kita menyimpan token yang sebelumnya dibuat saat login
+        ->tokens()
+
+        // terakhir, kita mengarahkan ke delete() yang akan menghapus semua token terkait dengan pengguna itu
+        // pengguna tidak bisa mengakses endpoint yang lain. jika ingin mengakses lagi, pengguna harus login
+        // syaratnya ya harus nyambung ke middleware auth:sanctum, karena middleware itu buat authentikasi
+        ->delete();
 
         return response()->json([
             'message' => 'logout success'
