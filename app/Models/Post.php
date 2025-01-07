@@ -9,15 +9,21 @@ class Post extends Model
 {
     use HasFactory;
     // bagian yang bisa diisi
-    protected $fillable= [
+    protected $fillable = [
         'title',
         'body'
     ];
 
     // ngehubungin model Post ke User
+    // public function user(){
+    //     return $this->belongsTo(User::class);
+    // }
+
+    // ngehubungin model Post ke User
     // menjelaskan bahwa model Post punya hubungan dengan model lain, yaitu User.
 
-    public function user(){
+    public function user()
+    {
         //belongsTo buat ngambil foreign key ke model yang dituju
 
         // maksud e gini, di model user itu punya yang namanya foreign key

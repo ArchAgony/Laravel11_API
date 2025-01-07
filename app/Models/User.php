@@ -21,6 +21,10 @@ class User extends Authenticatable
     ];
 
     // ngehubungin model Post ke User
+    // public function posts(){
+    //     return $this->hasMany(Post::class);
+    // }
+
     // nama function ini akan dipakai saat menambah data (cek ke postController)
     public function posts(){
         // hasMany buat ngasih foreign key ke model yang dituju
@@ -29,7 +33,17 @@ class User extends Authenticatable
         // nah, foreign key ini yang bakal kita pake.
         // klo dilihat di struktur tabel post, nanti ada kolom user_id.
         // user id itulah foreign keynya. dan user_id itu ambilya kan otomatis harus di model user
-        return $this->hasMany(Post::class);
+
+        return
+
+        // mereferensikan ke user user yang spesifik
+        $this
+
+        // mendefinisikan relasi one-to-many. maksudnya adalah model ini (user), bisa memiliki banyak model yang terhubung (post)
+        ->hasMany(
+
+            // menjelaskan manakah model yang memiliki relasi bagian many
+            Post::class);
     }
 
     protected $hidden = [

@@ -15,9 +15,11 @@ class PostPolicy
         // model Post yang akan dimodifikasi.
         Post $post): Response
     {
-        // Mengecek apakah ID pengguna yang sedang login ($user->id) sama dengan ID pengguna yang memiliki post tersebut ($post->user_id).
         // Jika cocok, berarti pengguna memiliki izin untuk memodifikasi post tersebut.
-        return $user->id === $post->user_id
+        return
+        
+        // Mengecek apakah ID pengguna yang sedang login ($user->id) sama dengan ID pengguna yang memiliki post tersebut ($post->user_id)
+        $user->id === $post->user_id
 
             // jika benar, maka aksi boleh dilakukan
             ? Response::allow()
